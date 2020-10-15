@@ -17,23 +17,37 @@ class HomePage extends StatefulWidget {
 class _MyHomePageState extends State<HomePage>  with SingleTickerProviderStateMixin{
 
   TabController _tabController;
+  IconData floatingActionButtonIcon = Icons.chat;
 
   @override
   void initState() {
     super.initState();
 
-    var tabController = TabController(vsync: this, length: 4);
-    _tabController = tabController;
+    _tabController = TabController(vsync: this,initialIndex: 1, length: 4);
+    // setState(() {
+    //   _tabController.addListener((){
+    //     print('my index is'+ _tabController.index.toString());
+    //     switch (_tabController.index){
+    //       case 1 : {
+    //         floatingActionButtonIcon = Icons.chat;
+    //         break;
+    //       }
+    //       case 2 :{
+    //         this.floatingActionButtonIcon = Icons.camera_alt;
+    //         break;
+    //       }
+    //     }
+    //   });
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
         actions: [
-          Icon(Icons.search),
+          Icon(Icons.search), 
           SizedBox(
             width: 10.0,
           ),
@@ -44,21 +58,23 @@ class _MyHomePageState extends State<HomePage>  with SingleTickerProviderStateMi
         ],
         bottom: TabBar(
           controller: _tabController,
+          // isScrollable: true,
+          // labelPadding: EdgeInsets.symmetric(horizontal: 10.0),
           tabs: [
-          Tab(
-            icon: Icon(
-              Icons.camera_alt
+            Tab(
+              icon: Icon(
+                Icons.camera_alt
+              ),
             ),
-          ),
-          Tab(
-            child: Text("CHAT"),
-          ),
-          Tab(
-            child: Text("STATUS"),
-          ),
-          Tab(
-            child: Text("Calls"),
-          ),
+            Tab(
+              child: Text("CHAT"),
+            ),
+            Tab(
+              child: Text("STATUS"),
+            ),
+            Tab(
+              child: Text("Calls"),
+            ),
         ],),
       ),
       body: TabBarView(
@@ -68,12 +84,15 @@ class _MyHomePageState extends State<HomePage>  with SingleTickerProviderStateMi
           ChatScreen(),
           StatusScreen(),
           CallsScreen(),
-      ],)
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: ,
-      //   tooltip: 'Increment',
-      //   child: Icon(Icons.chat),
-      // ),
+      ],),
+      floatingActionButton: FloatingActionButton(
+        onPressed:(){
+        } ,
+        backgroundColor: Colors.greenAccent[700],
+        child: Icon(
+          floatingActionButtonIcon,
+          color: Colors.white,),
+      ),
     );
   }
 }
